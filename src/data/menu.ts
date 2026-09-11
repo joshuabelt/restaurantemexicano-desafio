@@ -1,4 +1,5 @@
 import { MenuItem } from '../types';
+import { validateMenuItem } from '../utils/validation';
 
 export const MENU: MenuItem[] = [
   // Alimentos
@@ -19,3 +20,8 @@ export const MENU: MenuItem[] = [
   { id: '14', type: 'drink', name: 'Gaseosa Sevenup', price: 3.50, image: 'https://via.placeholder.com/100/ADD8E6/000000?text=Sevenup' },
   { id: '15', type: 'drink', name: 'Coca Cola', price: 1.80, image: 'https://via.placeholder.com/100/ADD8E6/000000?text=Coca+Cola' },
 ];
+
+MENU.forEach(item => {
+  const validationError = validateMenuItem(item);
+  if (validationError) throw new Error(`Producto inválido (${item.id}): ${validationError}`);
+});

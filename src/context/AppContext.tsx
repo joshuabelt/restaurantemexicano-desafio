@@ -31,6 +31,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, []);
 
   const updateQuantity = (id: string, delta: number) => {
+    if (!Number.isInteger(delta) || delta === 0) return;
+
     setCart(prev => {
       const newQty = (prev[id] || 0) + delta;
       const updated = { ...prev };

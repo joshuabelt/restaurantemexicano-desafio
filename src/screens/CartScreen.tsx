@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, FlatList, TouchableOpacity, StyleSheet, Alert
 import { MENU } from '../data/menu';
 import { Order } from '../types';
 import { useAppContext } from '../context/AppContext';
+import { validateMenuItem, validateQuantity } from '../utils/validation';
 
 export const CartScreen = ({ navigation }: any) => {
   const { cart, clearCart, saveOrder } = useAppContext();
@@ -18,6 +19,16 @@ export const CartScreen = ({ navigation }: any) => {
 
   const handleConfirm = () => {
     if (cartItems.length === 0) return Alert.alert('Carrito vacío', 'Agrega productos primero.');
+
+    const invalidProduct = cartItems.find(item => validateMenuItem(item.product));
+    if (invalidProduct) {
+      return Alert.alert('Producto inválido', validateMenuItem(invalidProduct.product) || 'Revisa los datos del producto.');
+    }
+
+    const invalidQuantity = cartItems.find(item => validateQuantity(item.quantity));
+    if (invalidQuantity) {
+      return Alert.alert('Cantidad inválida', validateQuantity(invalidQuantity.quantity) || 'La cantidad debe ser un entero mayor que 0.');
+    }
 
     const newOrder: Order = {
       id: Date.now().toString(),

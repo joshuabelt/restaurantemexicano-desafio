@@ -54,6 +54,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
     } catch (error) {
       console.error('Error guardando orden:', error);
+      throw error;
     }
   };
 

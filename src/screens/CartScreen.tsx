@@ -30,19 +30,35 @@ export const CartScreen = ({ navigation }: any) => {
       return Alert.alert('Cantidad inválida', validateQuantity(invalidQuantity.quantity) || 'La cantidad debe ser un entero mayor que 0.');
     }
 
-    const newOrder: Order = {
-      id: Date.now().toString(),
-      date: new Date().toLocaleString(),
-      items: cartItems,
-      subtotal: subtotalGeneral,
-      iva,
-      total: totalFinal,
-    };
+    Alert.alert(
+      'Confirmar orden',
+      `¿Confirmar orden por $${totalFinal.toFixed(2)}?`,
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Confirmar',
+          onPress: async () => {
+            const newOrder: Order = {
+              id: Date.now().toString(),
+              date: new Date().toLocaleString(),
+              items: cartItems,
+              subtotal: subtotalGeneral,
+              iva,
+              total: totalFinal,
+            };
 
-    saveOrder(newOrder);
-    clearCart();
-    Alert.alert('¡Éxito!', 'Orden confirmada y guardada.');
-    navigation.goBack();
+            try {
+              await saveOrder(newOrder);
+              clearCart();
+              Alert.alert('¡Éxito!', 'Orden confirmada y guardada.');
+              navigation.goBack();
+            } catch {
+              Alert.alert('Error', 'No se pudo guardar la orden. Intenta nuevamente.');
+            }
+          },
+        },
+      ],
+    );
   };
 
   return (

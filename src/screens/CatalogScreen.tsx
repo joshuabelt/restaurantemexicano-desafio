@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { SafeAreaView, View, Text, FlatList, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { MENU } from '../data/menu';
 import { MenuItem } from '../types';
 import { useAppContext } from '../context/AppContext';
@@ -9,6 +9,15 @@ export const CatalogScreen = () => {
   const [activeTab, setActiveTab] = useState<'food' | 'drink'>('food');
 
   const filteredMenu = MENU.filter(item => item.type === activeTab);
+
+  const addProduct = (item: MenuItem, quantity: number) => {
+    if (quantity >= 20) {
+      Alert.alert('Límite alcanzado', 'No puedes agregar más de 20 unidades del mismo producto.');
+      return;
+    }
+
+    updateQuantity(item.id, 1);
+  };
 
   const renderItem = ({ item }: { item: MenuItem }) => {
     const qty = cart[item.id] || 0;
@@ -22,7 +31,7 @@ export const CatalogScreen = () => {
         <View style={styles.controls}>
           <TouchableOpacity style={styles.qtyBtn} onPress={() => updateQuantity(item.id, -1)}><Text>-</Text></TouchableOpacity>
           <Text style={styles.qtyText}>{qty}</Text>
-          <TouchableOpacity style={styles.qtyBtn} onPress={() => updateQuantity(item.id, 1)}><Text>+</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.qtyBtn} onPress={() => addProduct(item, qty)}><Text>+</Text></TouchableOpacity>
         </View>
       </View>
     );

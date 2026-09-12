@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartState, Order } from '../types';
+import { MAX_QUANTITY_PER_PRODUCT } from '../utils/validation';
 
 const HISTORY_KEY = '@order_history';
 
@@ -35,6 +36,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     setCart(prev => {
       const newQty = (prev[id] || 0) + delta;
+      if (newQty > MAX_QUANTITY_PER_PRODUCT) return prev;
+
       const updated = { ...prev };
       if (newQty <= 0) delete updated[id];
       else updated[id] = newQty;

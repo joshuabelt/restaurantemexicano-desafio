@@ -8,7 +8,7 @@ export const HomeScreen = () => {
       <Text style={styles.eyebrow}>SABOR MEXICANO</Text>
       <Text style={styles.title}>¡Bienvenido a nuestro restaurante!</Text>
       <Text style={styles.subtitle}>¿Qué desea ordenar?</Text>
-      <Image source={{ uri: MENU[0].image }} style={styles.image} />
+      <Image source={MENU[0].image} style={styles.image} />
       <Text style={styles.caption}>Disfruta nuestros sabores mexicanos</Text>
     </SafeAreaView>
   );

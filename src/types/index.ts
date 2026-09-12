@@ -1,9 +1,11 @@
+import { ImageSourcePropType } from 'react-native';
+
 export interface MenuItem {
   id: string;
   type: 'food' | 'drink';
   name: string;
   price: number;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 export type CartState = Record<string, number>;

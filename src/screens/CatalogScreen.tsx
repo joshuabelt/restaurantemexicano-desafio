@@ -23,7 +23,7 @@ export const CatalogScreen = () => {
     const qty = cart[item.id] || 0;
     return (
       <View style={styles.card}>
-        <Image source={{ uri: item.image }} style={styles.image} />
+        <Image source={item.image} style={styles.image} />
         <View style={styles.cardInfo}>
           <Text style={styles.itemName}>{item.name}</Text>
           <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>

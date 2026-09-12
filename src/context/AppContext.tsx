@@ -3,9 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartState, Order } from '../types';
 import { MAX_QUANTITY_PER_PRODUCT } from '../utils/validation';
 
-const HISTORY_KEY = '@order_history';
+const HISTORY_KEY_PREFIX = '@order_history:';
 
 interface AppContextType {
+  currentUser: string | null;
+  login: (username: string) => void;
+  logout: () => void;
   cart: CartState;
   updateQuantity: (id: string, delta: number) => void;
   clearCart: () => void;
@@ -16,20 +19,42 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [cart, setCart] = useState<CartState>({});
   const [history, setHistory] = useState<Order[]>([]);
 
+  const login = (username: string) => {
+    setCurrentUser(username);
+    setCart({});
+    setHistory([]);
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+    setCart({});
+    setHistory([]);
+  };
+
   useEffect(() => {
+    if (!currentUser) return;
+
+    let cancelled = false;
+
     const loadData = async () => {
       try {
-        const storedHistory = await AsyncStorage.getItem(HISTORY_KEY);
-        if (storedHistory) setHistory(JSON.parse(storedHistory));
+        const historyKey = `${HISTORY_KEY_PREFIX}${currentUser}`;
+        const storedHistory = await AsyncStorage.getItem(historyKey);
+        if (!cancelled) setHistory(storedHistory ? JSON.parse(storedHistory) : []);
       } catch (error) {
-        console.error('Error cargando historial:', error);
+        if (!cancelled) console.error('Error cargando historial:', error);
       }
     };
     loadData();
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentUser]);
 
   const updateQuantity = (id: string, delta: number) => {
     if (!Number.isInteger(delta) || delta === 0) return;
@@ -48,10 +73,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const clearCart = () => setCart({});
 
   const saveOrder = async (order: Order) => {
+    if (!currentUser) throw new Error('No hay un usuario autenticado.');
+
     try {
       const newHistory = [order, ...history];
       setHistory(newHistory);
-      await AsyncStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
+      const historyKey = `${HISTORY_KEY_PREFIX}${currentUser}`;
+      await AsyncStorage.setItem(historyKey, JSON.stringify(newHistory));
     } catch (error) {
       console.error('Error guardando orden:', error);
       throw error;
@@ -59,7 +87,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   return (
-    <AppContext.Provider value={{ cart, updateQuantity, clearCart, history, saveOrder }}>
+    <AppContext.Provider value={{ currentUser, login, logout, cart, updateQuantity, clearCart, history, saveOrder }}>
       {children}
     </AppContext.Provider>
   );

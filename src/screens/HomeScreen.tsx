@@ -15,10 +15,10 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24, backgroundColor: '#FFF8F0' },
-  eyebrow: { color: '#D32F2F', fontSize: 14, fontWeight: 'bold', letterSpacing: 2, marginBottom: 14 },
-  title: { color: '#3E2723', fontSize: 28, fontWeight: 'bold', textAlign: 'center', lineHeight: 36 },
-  subtitle: { color: '#6D4C41', fontSize: 20, marginTop: 12, marginBottom: 28 },
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 24, backgroundColor: '#9B2226' },
+  eyebrow: { color: '#F9C74F', fontSize: 14, fontWeight: 'bold', letterSpacing: 2, marginBottom: 14 },
+  title: { color: '#FFFFFF', fontSize: 28, fontWeight: 'bold', textAlign: 'center', lineHeight: 36 },
+  subtitle: { color: '#FFF4D6', fontSize: 20, marginTop: 12, marginBottom: 28 },
   image: { width: '100%', height: 230, borderRadius: 16 },
-  caption: { color: '#795548', fontSize: 16, fontStyle: 'italic', marginTop: 18 },
+  caption: { color: '#FFF4D6', fontSize: 16, fontStyle: 'italic', marginTop: 18 },
 });

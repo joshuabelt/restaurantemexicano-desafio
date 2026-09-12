@@ -69,14 +69,14 @@ export const CartScreen = ({ navigation }: any) => {
         ListEmptyComponent={<Text style={styles.emptyText}>Tu orden está vacía</Text>}
         renderItem={({ item }) => (
           <View style={styles.cartItem}>
-            <Text style={{ flex: 2 }}>{item.product.name} (x{item.quantity})</Text>
-            <Text style={{ flex: 1, textAlign: 'right' }}>${item.subtotal.toFixed(2)}</Text>
+            <Text style={styles.cartItemName}>{item.product.name} (x{item.quantity})</Text>
+            <Text style={styles.cartItemPrice}>${item.subtotal.toFixed(2)}</Text>
           </View>
         )}
       />
       <View style={styles.totalsContainer}>
-        <View style={styles.totalRow}><Text>Subtotal:</Text><Text>${subtotalGeneral.toFixed(2)}</Text></View>
-        <View style={styles.totalRow}><Text>IVA (13%):</Text><Text>${iva.toFixed(2)}</Text></View>
+        <View style={styles.totalRow}><Text style={styles.totalLabel}>Subtotal:</Text><Text style={styles.totalLabel}>${subtotalGeneral.toFixed(2)}</Text></View>
+        <View style={styles.totalRow}><Text style={styles.totalLabel}>IVA (13%):</Text><Text style={styles.totalLabel}>${iva.toFixed(2)}</Text></View>
         <View style={[styles.totalRow, styles.finalRow]}><Text style={styles.bold}>Total Final:</Text><Text style={styles.bold}>${totalFinal.toFixed(2)}</Text></View>
         <TouchableOpacity style={styles.primaryBtn} onPress={handleConfirm}>
           <Text style={styles.btnText}>Confirmar Orden</Text>
@@ -87,13 +87,16 @@ export const CartScreen = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9f9f9', padding: 15 },
-  emptyText: { textAlign: 'center', marginTop: 20, color: '#666' },
-  cartItem: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: 1, borderColor: '#eee' },
-  totalsContainer: { backgroundColor: 'white', padding: 20, borderRadius: 8, elevation: 3, marginTop: 10 },
+  container: { flex: 1, backgroundColor: '#9B2226', padding: 15 },
+  emptyText: { textAlign: 'center', marginTop: 20, color: '#FFF4D6' },
+  cartItem: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 10, borderBottomWidth: 1, borderColor: '#D9685E' },
+  cartItemName: { flex: 2, color: '#FFFFFF' },
+  cartItemPrice: { flex: 1, textAlign: 'right', color: '#FFFFFF' },
+  totalsContainer: { backgroundColor: '#006847', padding: 20, borderRadius: 8, elevation: 3, marginTop: 10 },
   totalRow: { flexDirection: 'row', justifyContent: 'space-between', marginVertical: 5 },
-  finalRow: { borderTopWidth: 1, borderColor: '#eee', paddingTop: 10 },
-  bold: { fontWeight: 'bold', fontSize: 16 },
+  totalLabel: { color: '#FFFFFF' },
+  finalRow: { borderTopWidth: 1, borderColor: '#5AAE83', paddingTop: 10 },
+  bold: { fontWeight: 'bold', fontSize: 16, color: '#FFFFFF' },
   primaryBtn: { backgroundColor: '#D32F2F', padding: 15, borderRadius: 8, alignItems: 'center', marginTop: 15 },
   btnText: { color: 'white', fontWeight: 'bold', fontSize: 16 },
 });

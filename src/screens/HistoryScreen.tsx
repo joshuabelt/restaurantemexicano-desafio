@@ -26,10 +26,10 @@ export const HistoryScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9f9f9', padding: 15 },
-  emptyText: { textAlign: 'center', marginTop: 20, color: '#666' },
-  historyCard: { backgroundColor: 'white', padding: 15, borderRadius: 8, marginBottom: 15, elevation: 2 },
-  bold: { fontWeight: 'bold', fontSize: 15 },
-  itemDetail: { color: '#555', marginTop: 3 },
-  totalText: { fontWeight: 'bold', fontSize: 16, textAlign: 'right', marginTop: 8, color: '#D32F2F' },
+  container: { flex: 1, backgroundColor: '#9B2226', padding: 15 },
+  emptyText: { textAlign: 'center', marginTop: 20, color: '#FFF4D6' },
+  historyCard: { backgroundColor: '#006847', padding: 15, borderRadius: 8, marginBottom: 15, elevation: 2 },
+  bold: { fontWeight: 'bold', fontSize: 15, color: '#FFFFFF' },
+  itemDetail: { color: '#E7F5E9', marginTop: 3 },
+  totalText: { fontWeight: 'bold', fontSize: 16, textAlign: 'right', marginTop: 8, color: '#F9C74F' },
 });

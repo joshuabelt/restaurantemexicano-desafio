@@ -7,12 +7,16 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { CatalogScreen } from '../screens/CatalogScreen';
 import { CartScreen } from '../screens/CartScreen';
 import { HistoryScreen } from '../screens/HistoryScreen';
+import { useAppContext } from '../context/AppContext';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const LogoutScreen = ({ navigation }: any) => {
+  const { logout } = useAppContext();
+
   useEffect(() => {
+    logout();
     navigation.getParent()?.reset({
       index: 0,
       routes: [{ name: 'Login' }],
@@ -24,7 +28,7 @@ const LogoutScreen = ({ navigation }: any) => {
 
 const AppDrawer = () => {
   return (
-    <Drawer.Navigator initialRouteName="Home">
+    <Drawer.Navigator initialRouteName="Home" screenOptions={{ drawerActiveTintColor: '#9B2226', drawerInactiveTintColor: '#006847', drawerStyle: { backgroundColor: '#FFF8E7' } }}>
       <Drawer.Screen name="Home" component={HomeScreen} options={{ title: 'Inicio' }} />
       <Drawer.Screen name="Catalog" component={CatalogScreen} options={{ title: 'Ordenar comida' }} />
       <Drawer.Screen name="Cart" component={CartScreen} options={{ title: 'Orden actual' }} />

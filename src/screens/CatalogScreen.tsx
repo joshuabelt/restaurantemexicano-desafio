@@ -53,18 +53,18 @@ export const CatalogScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9f9f9', padding: 15 },
+  container: { flex: 1, backgroundColor: '#9B2226', padding: 15 },
   tabs: { flexDirection: 'row', marginBottom: 15 },
-  tab: { flex: 1, padding: 10, alignItems: 'center', borderBottomWidth: 2, borderColor: '#ccc' },
-  activeTab: { borderColor: '#D32F2F' },
-  tabText: { color: '#888', fontWeight: 'bold' },
-  activeTabText: { color: '#D32F2F', fontWeight: 'bold' },
-  card: { flexDirection: 'row', backgroundColor: 'white', padding: 10, marginBottom: 10, borderRadius: 8, alignItems: 'center', elevation: 2 },
+  tab: { flex: 1, padding: 10, alignItems: 'center', borderBottomWidth: 2, borderColor: '#F5D6A1' },
+  activeTab: { borderColor: '#F9C74F' },
+  tabText: { color: '#FFE8C2', fontWeight: 'bold' },
+  activeTabText: { color: '#FFFFFF', fontWeight: 'bold' },
+  card: { flexDirection: 'row', backgroundColor: '#006847', padding: 10, marginBottom: 10, borderRadius: 8, alignItems: 'center', elevation: 2 },
   image: { width: 60, height: 60, borderRadius: 30 },
   cardInfo: { flex: 1, marginLeft: 15 },
-  itemName: { fontSize: 16, fontWeight: 'bold' },
-  itemPrice: { color: '#4CAF50', marginTop: 5 },
+  itemName: { fontSize: 16, fontWeight: 'bold', color: '#FFFFFF' },
+  itemPrice: { color: '#F9C74F', marginTop: 5, fontWeight: 'bold' },
   controls: { flexDirection: 'row', alignItems: 'center' },
-  qtyBtn: { backgroundColor: '#eee', width: 30, height: 30, borderRadius: 15, justifyContent: 'center', alignItems: 'center' },
-  qtyText: { marginHorizontal: 10, fontSize: 16 },
+  qtyBtn: { backgroundColor: '#F9C74F', width: 30, height: 30, borderRadius: 15, justifyContent: 'center', alignItems: 'center' },
+  qtyText: { marginHorizontal: 10, fontSize: 16, color: '#FFFFFF', fontWeight: 'bold' },
 });
